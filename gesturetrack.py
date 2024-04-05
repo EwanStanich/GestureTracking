@@ -263,6 +263,6 @@ def predictions():
         cv2.destroyAllWindows()
 
 
-# capture()
+capture()
 # train_data()
-predictions()
+# predictions()
