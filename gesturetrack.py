@@ -200,6 +200,9 @@ def train_data():
     
 
 def predictions():
+    count = 0
+    timer = 3
+    is_taking_photo = False
     model = load_model()
 
     # 1. New detection variables
@@ -212,6 +215,17 @@ def predictions():
     # Set mediapipe model 
     with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
         while cap.isOpened():
+
+            if is_taking_photo:
+                if count % 15 == 0:
+                    print(timer)
+                    timer -= 1
+                count += 1
+                if count % 45 == 0:
+                    print("Snap")
+                    cv2.imwrite(os.path.join('Output Images', '{}.jpg'.format(uuid.uuid1())), image)
+                    is_taking_photo = False
+                    timer = 3
 
             # Read feed
             ret, frame = cap.read()
@@ -256,6 +270,8 @@ def predictions():
             # Show to screen
             cv2.imshow('OpenCV Feed', image)
 
+            if cv2.waitKey(10) & 0xFF == ord('s'):
+                is_taking_photo = True
             # Break gracefully
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 break
@@ -263,6 +279,6 @@ def predictions():
         cv2.destroyAllWindows()
 
 
-capture()
+# capture()
 # train_data()
-# predictions()
+predictions()
