@@ -10,3 +10,5 @@ To capture data, comment out the capture() function in gesturetrack.py and uncom
 To train data, run train_data.py and the model will be output as action.h5.
 
 To run prediction in real-time, uncomment the predictions() function in gesturetrack.py and run the file.
+
+I have also added an ipynb file for Jupyter notebooks. Instructions are easy to follow; however, when closing the camera, normally done by pressing q, Jupyter Notebooks has some issue with OpenCV, and thus the window with the camera open will freeze and not allow a rerun. To avoid this and run functions that open the camera multiple times, you must interrupt the kernel by pressing i twice. When you are done, you will then need to restart the kernel and the frozen window will close.
